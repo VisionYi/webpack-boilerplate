@@ -1,3 +1,14 @@
+/**
+ * This webpack.config has below functions:
+ * - minify `js` & `css`
+ * - use preprocessor： `babel`, `scss/sass`, `postcss & autoprefixer`
+ * - static files use `hash url` to avoid the cache
+ * - use image base64
+ * - use devServer - hot reload for `js`, `html`, `css/scss/sass`
+ * - have many custom variables for CLI, using on the npm script
+ * - auto clean the output folder
+ */
+
 const path = require('path');
 const webpack = require('webpack');
 const chokidar = require('chokidar'); // hot reload for html, webpack-dev-server has include this plugin.
@@ -9,6 +20,14 @@ const cleanWebpackPlugin = require('clean-webpack-plugin');
 
 const devMode = process.env.NODE_ENV !== 'production';
 
+/**
+ * CLI can use below variables of `env` object params:
+ * name       - project name
+ * entry      - js entry
+ * template   - html template
+ * output     - path output
+ * publicPath - prefix path for static file, used to on the production mode
+ */
 module.exports = ({
   name = 'app',
   entry = './index.js',
