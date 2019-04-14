@@ -1,14 +1,3 @@
-/**
- * This webpack.config has below functions:
- * - minify `js` & `css`
- * - use preprocessor： `babel`, `scss/sass`, `postcss & autoprefixer`
- * - static files use `hash url` to avoid the cache
- * - use image base64
- * - use devServer - hot reload for `js`, `html`, `css/scss/sass`
- * - have many custom variables for CLI, using on the npm script
- * - auto clean the output folder
- */
-
 const path = require('path');
 const webpack = require('webpack');
 const chokidar = require('chokidar'); // hot reload for html, webpack-dev-server has include this plugin.
