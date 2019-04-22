@@ -24,22 +24,34 @@ module.exports = ({
   output = './dist',
   publicPath = '/',
 } = {}) => {
+  const getName = (pathString) => pathString.replace(/\.[^/.]+$/, '').split('/').slice(-1).join()
   const projectPath = path.resolve(__dirname, name);
   const outputPath = path.resolve(__dirname, name, output);
   const htmlPath = path.resolve(__dirname, name, template);
   return {
     context: projectPath,
-    entry: entry,
+    entry: {
+      [getName(entry)]: entry
+    },
     output: {
       path: outputPath,
-      filename: '[name].js',
+      filename: devMode ? '[name].js' : '[name].[contenthash:8].js',
       publicPath: devMode ? '/' : publicPath,
     },
     optimization: {
       minimizer: [
         new terserPlugin(),
         new optimizeCSSAssetsPlugin()
-      ]
+      ],
+      splitChunks: {
+        cacheGroups: {
+          vendor: {
+            test: /[\\/]node_modules[\\/]/,
+            name: 'vendors',
+            chunks: 'all'
+          }
+        }
+      }
     },
     devServer: {
       before(app, server) {
@@ -54,12 +66,14 @@ module.exports = ({
     },
     plugins: [
       new htmlWebpackPlugin({
-        template: template,
-        hash: true,
+        filename: getName(template) + '.html',
+        template: template
       }),
-      new miniCssExtractPlugin(),
-      new webpack.HotModuleReplacementPlugin(), // hot reload plugin
+      new miniCssExtractPlugin({
+        filename: devMode ? '[name].css' : '[name].[contenthash:8].css',
+      }),
       new cleanWebpackPlugin(devMode ? '' : outputPath),
+      devMode ? new webpack.HotModuleReplacementPlugin() : new webpack.HashedModuleIdsPlugin(),
     ],
     module: {
       rules: [
@@ -79,9 +93,7 @@ module.exports = ({
         },
         {
           test: /\.(html)$/,
-          use: [
-            'html-loader'
-          ]
+          use: ['html-loader']
         },
         {
           test: /\.(jpe?g|png|gif)$/,
@@ -91,7 +103,7 @@ module.exports = ({
               options: {
                 limit: 5*1024, // if the file is less 5k size, it will be transform into base64 URIs.
                 outputPath: 'images',
-                name: '[name].[ext]?[hash:10]'
+                name: devMode ? '[name].[ext]' : '[name].[contenthash:8].[ext]'
               }
             }
           ]
