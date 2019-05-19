@@ -10,9 +10,10 @@ This Webpack tool is suitable for combination of multiple small projects.
 - static files use `hash` filename to avoid the cache
 - use image base64
 - use devServer - hot reload for `js`, `html`, `css/scss/sass`
-- have many **custom variables** for CLI, using on the npm scripts
+- have many **custom variables*** for CLI, using on the npm scripts
 - auto clean the output folder
 
+\# Custom variables: `name`, `entry`, `template`, `output`, `publicPath`
 ## Requirements
 You only need node.js pre-installed.
 
@@ -43,7 +44,7 @@ $ npm run build
 3. Add your npm script content on the package.json `scripts`:
    - On development node, you can write like `"dev:example": "webpack-dev-server --mode development --evn.name=example"`
    - On production node, you can write like `"build:example": "NODE_ENV=production webpack --mode production --evn.name=example"`
-   - Otherwise you can set `--env.{variable}={value}` config, there are 5 variables: **name, entry, template, output, publicPath**. (see `webpack.config.js` to get more details)
+   - Otherwise you can set `--env.{variable}={value}` config, there are 5 variables: **name, entry, template, output, publicPath**. ( see `webpack.config.js` to get more details )
 
 4. Start your project coding now.
 
