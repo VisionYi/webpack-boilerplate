@@ -7,7 +7,7 @@ This Webpack tool is suitable for combination of multiple small projects.
 ## Features
 - minify `js` & `css`
 - use preprocessor： `babel`, `scss/sass`, `postcss & autoprefixer`
-- static files use `hash url` to avoid the cache
+- static files use `hash` filename to avoid the cache
 - use image base64
 - use devServer - hot reload for `js`, `html`, `css/scss/sass`
 - have many **custom variables** for CLI, using on the npm scripts
