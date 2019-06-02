@@ -2,7 +2,7 @@
 There is Webpack 4 template you can build the project by it.<br>
 This Webpack tool is suitable for combination of multiple small projects.
 
-\# If you want to know more about this project, please see [快速建置常用的 Webpack 4 config & loader](https://github.com/VisionYi/blog/issues/2).
+\# If you want to know more about this project, please see [快速建置 Webpack 4 常用設定](https://medium.com/@shaneyihong/%E5%BF%AB%E9%80%9F%E5%BB%BA%E7%BD%AE-webpack-4-%E5%B8%B8%E7%94%A8%E8%A8%AD%E5%AE%9A-9741a0e2e6a8).
 
 ## Features
 - automatic minify JS, CSS and HTML
