@@ -5,7 +5,7 @@ This Webpack tool is suitable for combination of multiple small projects.
 \# If you want to know more about this project, please see [快速建置常用的 Webpack 4 config & loader](https://github.com/VisionYi/blog/issues/2).
 
 ## Features
-- minify `js` & `css`
+- automatic minify JS, CSS and HTML
 - use preprocessor： `babel`, `scss/sass`, `postcss & autoprefixer`
 - static files use `hash` filename to avoid the cache
 - use image base64
@@ -43,7 +43,9 @@ $ npm run build
 
 3. Add your npm script content on the package.json `scripts`:
    - On development node, you can write like `"dev:example": "webpack-dev-server --mode development --evn.name=example"`
+
    - On production node, you can write like `"build:example": "NODE_ENV=production webpack --mode production --evn.name=example"`
+
    - Otherwise you can set `--env.{variable}={value}` config, there are 5 variables: **name, entry, template, output, publicPath**. ( see `webpack.config.js` to get more details )
 
 4. Start your project coding now.

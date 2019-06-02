@@ -24,14 +24,14 @@ module.exports = ({
   output = './dist',
   publicPath = '/',
 } = {}) => {
-  const getName = (pathString) => pathString.replace(/\.[^/.]+$/, '').split('/').slice(-1).join()
+  const getFilename = (pathString) => pathString.replace(/\.[^/.]+$/, '').split('/').slice(-1).join()
   const projectPath = path.resolve(__dirname, name);
   const outputPath = path.resolve(__dirname, name, output);
   const htmlPath = path.resolve(__dirname, name, template);
   return {
     context: projectPath,
     entry: {
-      [getName(entry)]: entry
+      [getFilename(entry)]: entry
     },
     output: {
       path: outputPath,
@@ -66,7 +66,7 @@ module.exports = ({
     },
     plugins: [
       new htmlWebpackPlugin({
-        filename: getName(template) + '.html',
+        filename: getFilename(template) + '.html',
         template: template
       }),
       new miniCssExtractPlugin({
@@ -93,7 +93,12 @@ module.exports = ({
         },
         {
           test: /\.(html)$/,
-          use: ['html-loader']
+          use: [{
+            loader: 'html-loader',
+            options: {
+              minimize: true
+            }
+          }],
         },
         {
           test: /\.(jpe?g|png|gif)$/,
