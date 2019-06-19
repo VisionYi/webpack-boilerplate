@@ -24,7 +24,10 @@ module.exports = ({
   output = './dist',
   publicPath = '/',
 } = {}) => {
-  const getFilename = (pathString) => pathString.replace(/\.[^/.]+$/, '').split('/').slice(-1).join()
+  // it get the filename form whole file path without the extension
+  const getFilename = (pathString) => path.parse(pathString).name;
+
+  // All absolute path, here is about project root path, output, HTML actual path
   const projectPath = path.resolve(__dirname, name);
   const outputPath = path.resolve(__dirname, name, output);
   const htmlPath = path.resolve(__dirname, name, template);
@@ -101,7 +104,7 @@ module.exports = ({
           }],
         },
         {
-          test: /\.(jpe?g|png|gif)$/,
+          test: /\.(jpe?g|png|gif|svg)$/,
           use: [
             {
               loader: 'url-loader',
